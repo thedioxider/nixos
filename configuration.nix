@@ -85,8 +85,8 @@
     htop                    .enable = true;
     java                    .enable = true;
     less                    .enable = true;
-    nvim                    .enable = true;
-    nix-index               .enable = true;
+    neovim                  .enable = true;
+    # nix-index               .enable = true;
     nix-ld                  .enable = true;
     npm                     .enable = true;
     partition-manager       .enable = true;
@@ -97,7 +97,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    nvim
+    neovim
     wget
   ];
 
