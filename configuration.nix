@@ -14,12 +14,17 @@
   # Use the systemd-boot EFI boot loader.
   # boot.loader.systemd-boot.enable = true;
   boot.loader = {
-    efi.canTouchEfiVariables = true;
+    efi = {
+      canTouchEfiVariables = true;
+      efiSysMountPoint = "/efi";
+    };
     grub = {
       enable = true;
-      device = "nodev";
-      useOSProber = true;
+      useOSProber = false;
       efiSupport = true;
+      device = "nodev";
+      timeoutStyle = "menu";
+      default = "saved";
     };
   };
 
@@ -44,7 +49,11 @@
   # };
 
   # Enable the X11 windowing system.
-  # services.xserver.enable = true;
+  services.xserver.enable = true;
+
+  # KDE Plasma 6
+  services.displayManager.sddm.enable = true;
+  services.desktopManager.plasma6.enable = true;
 
 
   # Configure keymap in X11
@@ -97,7 +106,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    neovim
+    # neovim
     wget
   ];
 

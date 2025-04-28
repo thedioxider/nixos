@@ -18,11 +18,32 @@
       fsType = "ext4";
     };
 
-  fileSystems."/boot" =
+  fileSystems."/efi" =
     { device = "/dev/disk/by-uuid/9F38-9C03";
       fsType = "vfat";
       options = [ "fmask=0022" "dmask=0022" ];
     };
+
+  boot.loader.grub.extraEntries = ''
+menuentry 'Arch Linux' --class arch --class gnu-linux --class gnu --class os {
+    savedefault
+    set gfxpayload=keep
+    insmod gzio
+    insmod part_gpt
+    insmod fat
+    search --no-floppy --fs-uuid --set=root 9F38-9C03
+    linux /vmlinuz-linux root=UUID=a0918439-753b-4e5e-8eb7-69e90f3754fa rw loglevel=3 quiet resume=/dev/disk/by-uuid/42837e7a-845e-475a-8315-b31d4efc25d6
+    initrd /intel-ucode.img /initramfs-linux.img
+}
+
+menuentry 'Windows 11' --class windows --class os $menuentry_id_option {
+    savedefault
+    insmod part_gpt
+    insmod fat
+    search --no-floppy --fs-uuid --set=root 78FE-DD96
+    chainloader /efi/Microsoft/Boot/bootmgfw.efi
+}
+  '';
 
   swapDevices =
     [ { device = "/dev/disk/by-uuid/99a71219-fd36-4bc7-824b-9b048aedd575"; }
