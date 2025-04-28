@@ -9,6 +9,7 @@
     [
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./home-manager.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -27,6 +28,9 @@
       default = "saved";
     };
   };
+
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nixpkgs.config.allowUnfree = true;
 
   networking.hostName = "diomentia"; # Define your hostname.
   # Pick only one of the below networking options.
@@ -108,10 +112,7 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    # neovim
-    wget
-  ];
+  # environment.systemPackages = with pkgs; [ ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
