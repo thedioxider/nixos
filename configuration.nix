@@ -94,7 +94,10 @@
     htop                    .enable = true;
     java                    .enable = true;
     less                    .enable = true;
-    neovim                  .enable = true;
+    neovim = {
+      enable = true;
+      defaultEditor = true;
+    };
     # nix-index               .enable = true;
     nix-ld                  .enable = true;
     npm                     .enable = true;
