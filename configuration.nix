@@ -9,7 +9,8 @@
     [
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ./home-manager.nix
+      #./home-manager.nix
+      ./keyd.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -78,6 +79,8 @@
   # Enable touchpad support (enabled default in most desktopManager).
   services.libinput.enable = true;
 
+  users.groups.nixos.members = [ "root" "dio" ];
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.dio = {
     description = "Demetrius R.";
@@ -87,8 +90,13 @@
       "$y$j9T$mH5EZb/OBF8ACbwFGIEHa1$5Cw0t9dqll73lpN2vATJU9RW03/MWlPs.PwpgrZd0m0";
     useDefaultShell = false;
     shell = pkgs.fish;
-    extraGroups = [ "wheel" "networkmanager" ];
-    # packages = with pkgs; [ ];
+    extraGroups = [
+      "wheel"
+      "networkmanager"
+    ];
+    packages = with pkgs; [
+      home-manager
+    ];
   };
 
   programs = {
@@ -112,7 +120,9 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  # environment.systemPackages = with pkgs; [ ];
+  environment.systemPackages = with pkgs; [
+    trashy
+  ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
