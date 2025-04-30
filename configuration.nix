@@ -33,6 +33,16 @@
   system.copySystemConfiguration = true;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nixpkgs.config.allowUnfree = true;
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    persistent = true;
+    options = "--delete-older-than 90d";
+  };
+  nix.optimise = {
+    automatic = true;
+    dates = [ "monthly" ];
+  };
 
   networking.hostName = "diomentia"; # Define your hostname.
   # Pick only one of the below networking options.
