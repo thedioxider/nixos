@@ -18,6 +18,19 @@
       fsType = "ext4";
     };
 
+  fileSystems."/dsk/win/C" = {
+    device = "/dev/disk/by-uuid/0C06D2E106D2CABA";
+    fsType = "ntfs";
+  };
+  fileSystems."/dsk/win/D" = {
+    device = "/dev/disk/by-uuid/A876D57A76D54A28";
+    fsType = "ntfs";
+  };
+
+  fileSystems."/dsk/arch" = {
+    device = "/dev/disk/by-uuid/a0918439-753b-4e5e-8eb7-69e90f3754fa";
+  };
+
   fileSystems."/efi" =
     { device = "/dev/disk/by-uuid/9F38-9C03";
       fsType = "vfat";
