@@ -111,6 +111,7 @@
   };
 
   programs = {
+    command-not-found       .enable = false;
     firefox                 .enable = true;
     fish                    .enable = true;
     git                     .enable = true;
@@ -121,7 +122,7 @@
       enable = true;
       defaultEditor = true;
     };
-    # nix-index               .enable = true;
+    nix-index               .enable = true;
     nix-ld                  .enable = true;
     npm                     .enable = true;
     partition-manager       .enable = true;
@@ -133,6 +134,8 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     trashy
+    parted
+    gparted
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
