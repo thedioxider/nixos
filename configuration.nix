@@ -9,7 +9,7 @@
     [
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      #./home-manager.nix
+      ./graphics.nix
       ./keyd.nix
     ];
 
@@ -82,10 +82,10 @@
   # Enable sound.
   # hardware.pulseaudio.enable = true;
   # OR
-  # services.pipewire = {
-  #   enable = true;
-  #   pulse.enable = true;
-  # };
+  services.pipewire = {
+    enable = true;
+    pulse.enable = true;
+  };
 
   # Enable touchpad support (enabled default in most desktopManager).
   services.libinput.enable = true;
@@ -130,12 +130,17 @@
     yazi                    .enable = true;
   };
 
+  services = {
+  };
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     trashy
     parted
     gparted
+    p7zip
+    calc
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
