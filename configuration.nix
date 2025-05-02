@@ -56,13 +56,35 @@
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
+  fonts = {
+    enableDefaultPackages = true;
+    packages = with pkgs; [
+      noto-fonts
+      roboto roboto-slab roboto-mono roboto-flex roboto-serif
+      (nerdfonts.override { fonts = [
+        "NerdFontsSymbolsOnly"
+        "CascadiaCode" "CascadiaMono"
+        "Iosevka" "IosevkaTerm" "IosevkaTermSlab"
+        "JetBrainsMono"
+        "ComicShannsMono"
+      ]; })
+    ];
+
+    fontconfig.defaultFonts = {
+      serif = [ "Roboto Serif" "Noto Serif" ];
+      sansSerif = [ "Roboto Sans" "Noto Sans" ];
+      monospace = [ "CaskaydiaCove Nerd Font" "Roboto Mono" "Noto Sans Mono" ];
+      emoji = [ "Noto Emoji" ];
+    };
+  };
+
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
-  # console = {
-  #   font = "Lat2-Terminus16";
-  #   keyMap = "us";
-  #   useXkbConfig = true; # use xkb.options in tty.
-  # };
+  console = {
+    packages = with pkgs; [ terminus_font ];
+    font = "ter-120b";
+    useXkbConfig = true; # use xkb.options in tty.
+  };
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
@@ -73,8 +95,10 @@
 
 
   # Configure keymap in X11
-  # services.xserver.xkb.layout = "us";
-  # services.xserver.xkb.options = "eurosign:e,caps:escape";
+  services.xserver.xkb = {
+    layout = "us,ru";
+    options = "grp:win_space_toggle,caps:escape";
+  };
 
   # Enable CUPS to print documents.
   # services.printing.enable = true;
