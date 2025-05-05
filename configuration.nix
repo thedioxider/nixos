@@ -1,20 +1,38 @@
-# Edit this configuration file to define what should be installed on
-# your system. Help is available in the configuration.nix(5) man page, on
-# https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
-
-{ config, lib, pkgs, ... }:
-
-{
+{ config, lib, pkgs, ... }: {
   imports =
     [
-      # Include the results of the hardware scan.
+      ### Hardware-dependent options
       ./hardware-configuration.nix
+
+      ### Graphics card setup & drivers
       ./graphics.nix
+
+      ### Programs, Services & Environment
+      ./env.nix
+
+      ### Plasma Desktop
+      ./plasma.nix
+
+      ### keyd remapping service setup
       ./keyd.nix
     ];
 
-  # Use the systemd-boot EFI boot loader.
-  # boot.loader.systemd-boot.enable = true;
+### NixOS special options
+  system.copySystemConfiguration = true;
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nixpkgs.config.allowUnfree = true;
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    persistent = true;
+    options = "--delete-older-than 90d";
+  };
+  nix.optimise = {
+    automatic = true;
+    dates = [ "monthly" ];
+  };
+
+### Boot
   boot.loader = {
     efi = {
       canTouchEfiVariables = true;
@@ -30,32 +48,20 @@
     };
   };
 
-  system.copySystemConfiguration = true;
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  nixpkgs.config.allowUnfree = true;
-  nix.gc = {
-    automatic = true;
-    dates = "weekly";
-    persistent = true;
-    options = "--delete-older-than 90d";
-  };
-  nix.optimise = {
-    automatic = true;
-    dates = [ "monthly" ];
+### System
+  i18n.defaultLocale = "en_US.UTF-8";
+  console = {
+    packages = with pkgs; [ terminus_font ];
+    font = "ter-120b";
+    useXkbConfig = true; # use xkb.options in tty.
   };
 
-  networking.hostName = "diomentia"; # Define your hostname.
-  # Pick only one of the below networking options.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
+  networking.hostName = "diomentia";
+  networking.networkmanager.enable = true;
 
-  # Set your time zone.
   time.timeZone = "Europe/Moscow";
 
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
+  ### Fonts
   fonts = {
     enableDefaultPackages = true;
     packages = with pkgs; [
@@ -78,45 +84,24 @@
     };
   };
 
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
-  console = {
-    packages = with pkgs; [ terminus_font ];
-    font = "ter-120b";
-    useXkbConfig = true; # use xkb.options in tty.
-  };
-
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-
-  # KDE Plasma 6
-  services.displayManager.sddm.enable = true;
-  services.desktopManager.plasma6.enable = true;
-
-
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us,ru";
-    options = "grp:win_space_toggle,caps:escape";
-  };
-
-  # Enable CUPS to print documents.
-  # services.printing.enable = true;
-
-  # Enable sound.
-  # hardware.pulseaudio.enable = true;
-  # OR
+  services.libinput.enable = true;
+  services.printing.enable = true;
   services.pipewire = {
     enable = true;
     pulse.enable = true;
   };
 
-  # Enable touchpad support (enabled default in most desktopManager).
-  services.libinput.enable = true;
+  # enable the OpenSSH daemon
+  # services.openssh.enable = true;
 
+  services.xserver.xkb = {
+    layout = "us,ru";
+    options = "grp:win_space_toggle,caps:escape";
+  };
+
+### Users & Groups
   users.groups.nixos.members = [ "root" "dio" ];
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.dio = {
     description = "Demetrius R.";
     isNormalUser = true;
@@ -134,43 +119,8 @@
     ];
   };
 
-  environment.shellAliases = {};
 
-  programs = {
-    command-not-found       .enable = false;
-    firefox                 .enable = true;
-    fish                    .enable = true;
-    git                     .enable = true;
-    htop                    .enable = true;
-    java                    .enable = true;
-    less                    .enable = true;
-    neovim = {
-      enable = true;
-      defaultEditor = true;
-    };
-    nix-index               .enable = true;
-    nix-ld                  .enable = true;
-    npm                     .enable = true;
-    partition-manager       .enable = true;
-    rog-control-center      .enable = true;
-    yazi                    .enable = true;
-  };
-
-  services = {
-  };
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    gcc
-    wl-clipboard
-    trashy
-    parted
-    gparted
-    p7zip
-    calc
-  ];
-
+### Uncon-figured out (yet)
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
@@ -179,21 +129,11 @@
   #   enableSSHSupport = true;
   # };
 
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
-
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
-
-  # Copy the NixOS configuration file and link it from the resulting system
-  # (/run/current-system/configuration.nix). This is useful in case you
-  # accidentally delete configuration.nix.
-  # system.copySystemConfiguration = true;
 
 
 
@@ -216,6 +156,4 @@
   #
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
   system.stateVersion = "24.11"; # Did you read the comment?
-
 }
-
