@@ -134,6 +134,8 @@
     ];
   };
 
+  environment.shellAliases = {};
+
   programs = {
     command-not-found       .enable = false;
     firefox                 .enable = true;
@@ -160,6 +162,8 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    gcc
+    wl-clipboard
     trashy
     parted
     gparted
