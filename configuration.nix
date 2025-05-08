@@ -10,7 +10,10 @@
     ./env.nix
 
     ### Plasma Desktop
-    ./plasma.nix
+    # ./plasma.nix
+
+    ### Hyprland
+    ./hyprland.nix
 
     ### keyd remapping service setup
     ./keyd.nix
