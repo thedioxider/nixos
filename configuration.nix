@@ -1,26 +1,27 @@
 { config, lib, pkgs, ... }: {
-  imports =
-    [
-      ### Hardware-dependent options
-      ./hardware-configuration.nix
+  imports = [
+    ### Hardware-dependent options
+    ./hardware-configuration.nix
 
-      ### Graphics card setup & drivers
-      ./graphics.nix
+    ### Graphics card setup & drivers
+    ./graphics.nix
 
-      ### Programs, Services & Environment
-      ./env.nix
+    ### Programs, Services & Environment
+    ./env.nix
 
-      ### Plasma Desktop
-      ./plasma.nix
+    ### Plasma Desktop
+    ./plasma.nix
 
-      ### keyd remapping service setup
-      ./keyd.nix
-    ];
+    ### keyd remapping service setup
+    ./keyd.nix
+  ];
 
 ### NixOS special options
   system.copySystemConfiguration = true;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+    "nvidia-settings" "nvidia-x11"
+  ];
   nix.gc = {
     automatic = true;
     dates = "weekly";
@@ -53,7 +54,7 @@
   console = {
     packages = with pkgs; [ terminus_font ];
     font = "ter-120b";
-    useXkbConfig = true; # use xkb.options in tty.
+    useXkbConfig = true;
   };
 
   networking.hostName = "diomentia";
@@ -67,14 +68,13 @@
     packages = with pkgs; [
       noto-fonts
       roboto roboto-slab roboto-mono roboto-flex roboto-serif
-      (nerdfonts.override { fonts = [
-        "NerdFontsSymbolsOnly"
-        "CascadiaCode" "CascadiaMono"
-        "Iosevka" "IosevkaTerm" "IosevkaTermSlab"
-        "JetBrainsMono"
-        "ComicShannsMono"
-      ]; })
-    ];
+    ] ++ (with pkgs.nerd-fonts; [
+      symbols-only
+      caskaydia-cove caskaydia-mono
+      iosevka iosevka-term iosevka-term-slab
+      jetbrains-mono
+      comic-shanns-mono
+    ]);
 
     fontconfig.defaultFonts = {
       serif = [ "Roboto Serif" "Noto Serif" ];
@@ -86,18 +86,11 @@
 
   services.libinput.enable = true;
   services.printing.enable = true;
-  services.pipewire = {
-    enable = true;
-    pulse.enable = true;
-  };
 
   # enable the OpenSSH daemon
   # services.openssh.enable = true;
 
-  services.xserver.xkb = {
-    layout = "us,ru";
-    options = "grp:win_space_toggle,caps:escape";
-  };
+  services.xserver.xkb.options = "grp:win_space_toggle,shift:both_shiftlock";
 
 ### Users & Groups
   users.groups.nixos.members = [ "root" "dio" ];

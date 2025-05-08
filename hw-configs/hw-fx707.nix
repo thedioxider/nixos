@@ -78,4 +78,6 @@ menuentry 'Windows 11' --class windows --class os $menuentry_id_option {
   };
 
   hardware.bluetooth.enable = true;
+
+  services.xserver.xkb.layout = "us,ru";
 }
