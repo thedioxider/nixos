@@ -10,7 +10,6 @@
             capslock = "esc";
             rightalt = "layer(movements)";
             "leftmeta + leftalt" = "layer(media)";
-            rightcontrol = "compose";
           };
           shift = {
             capslock = "capslock";

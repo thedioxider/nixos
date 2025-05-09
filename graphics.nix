@@ -10,6 +10,8 @@
   hardware.nvidia = {
     modesetting.enable = true;
 
+    dynamicBoost.enable = true;
+
     # turns off GPU when not in use
     powerManagement = {
       enable = true;

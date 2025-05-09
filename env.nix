@@ -2,9 +2,9 @@
 ### Programs, Services & Environment
   programs = {
     command-not-found       .enable = false;
-    firefox                 .enable = true;
     fish                    .enable = true;
     git                     .enable = true;
+    # TODO: maybe change to btop++
     htop                    .enable = true;
     java                    .enable = true;
     less                    .enable = true;
