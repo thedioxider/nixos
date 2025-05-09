@@ -1,4 +1,11 @@
-{ config, lib, pkgs, modulesPath, ... }: {
+{ config, lib, pkgs, modulesPath, ... }:
+let
+  asus-armoury = pkgs.fetchurl {
+    url = "https://lore.kernel.org/all/20240926092952.1284435-1-luke@ljones.dev/t.mbox.gz";
+    hash = "sha256-E6KdDvvyHiLUWWO/PAHXMtIDGFG0c7ZfAeohlhJtjwI=";
+  };
+in
+{
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
@@ -7,6 +14,12 @@
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
+  boot.kernelPatches = [
+    {
+      name = "asus-armoury";
+      patch = asus-armoury;
+    }
+  ];
 
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/5656b356-ca2f-4776-bc58-6f04094316f2";
