@@ -18,6 +18,10 @@
     partition-manager       .enable = true;
     rog-control-center      .enable = true;
     yazi                    .enable = true;
+    appimage = {
+      enable = true;
+      binfmt = true;
+    };
   };
 
   services = {};
@@ -26,6 +30,7 @@
 
   environment.systemPackages = with pkgs; [
     gcc
+    ffmpeg
     wl-clipboard
     trashy
     parted
