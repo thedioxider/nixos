@@ -3,6 +3,9 @@
     ### Hardware-dependent options
     ./hardware-configuration.nix
 
+    ### Power management & Sleep configs
+    ./power.nix
+
     ### Graphics card setup & drivers
     ./graphics.nix
 
@@ -106,6 +109,8 @@
       "$y$j9T$mH5EZb/OBF8ACbwFGIEHa1$5Cw0t9dqll73lpN2vATJU9RW03/MWlPs.PwpgrZd0m0";
     useDefaultShell = false;
     shell = pkgs.fish;
+    # start session at boot rather then at login
+    linger = true;
     extraGroups = [
       "wheel"
       "networkmanager"
