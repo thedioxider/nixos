@@ -4,9 +4,7 @@
     swaynotificationcenter
     hyprpolkitagent
 
-    (catppuccin-sddm.override {
-      flavor = "macchiato";
-    })
+    (catppuccin-sddm.override { flavor = "macchiato"; })
   ];
 
   environment.sessionVariables = {
@@ -21,11 +19,6 @@
     package = pkgs.kdePackages.sddm;
     theme = "catppuccin-macchiato";
   };
-  /*
-  programs.regreet = {
-    enable = true;
-  };
-  */
 
   services.pipewire = {
     enable = true;

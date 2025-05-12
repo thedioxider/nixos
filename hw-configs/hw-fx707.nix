@@ -1,25 +1,22 @@
 { config, lib, pkgs, modulesPath, ... }:
 let
   asus-armoury = pkgs.fetchurl {
-    url = "https://lore.kernel.org/all/20240926092952.1284435-1-luke@ljones.dev/t.mbox.gz";
+    url =
+      "https://lore.kernel.org/all/20240926092952.1284435-1-luke@ljones.dev/t.mbox.gz";
     hash = "sha256-E6KdDvvyHiLUWWO/PAHXMtIDGFG0c7ZfAeohlhJtjwI=";
   };
-in
-{
-  imports = [
-    (modulesPath + "/installer/scan/not-detected.nix")
-  ];
+in {
+  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "vmd" "nvme" "usb_storage" "sd_mod" "sr_mod" ];
+  boot.initrd.availableKernelModules =
+    [ "xhci_pci" "thunderbolt" "vmd" "nvme" "usb_storage" "sd_mod" "sr_mod" ];
   boot.initrd.kernelModules = [ "i915" ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
-  boot.kernelPatches = [
-    {
-      name = "asus-armoury";
-      patch = asus-armoury;
-    }
-  ];
+  boot.kernelPatches = [{
+    name = "asus-armoury";
+    patch = asus-armoury;
+  }];
 
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/5656b356-ca2f-4776-bc58-6f04094316f2";
@@ -46,29 +43,28 @@ in
   };
 
   boot.loader.grub.extraEntries = ''
-menuentry 'Arch Linux' --class arch --class gnu-linux --class gnu --class os {
-    savedefault
-    set gfxpayload=keep
-    insmod gzio
-    insmod part_gpt
-    insmod fat
-    search --no-floppy --fs-uuid --set=root 9F38-9C03
-    linux /vmlinuz-linux root=UUID=a0918439-753b-4e5e-8eb7-69e90f3754fa rw loglevel=3 quiet resume=/dev/disk/by-uuid/42837e7a-845e-475a-8315-b31d4efc25d6
-    initrd /intel-ucode.img /initramfs-linux.img
-}
+    menuentry 'Arch Linux' --class arch --class gnu-linux --class gnu --class os {
+        savedefault
+        set gfxpayload=keep
+        insmod gzio
+        insmod part_gpt
+        insmod fat
+        search --no-floppy --fs-uuid --set=root 9F38-9C03
+        linux /vmlinuz-linux root=UUID=a0918439-753b-4e5e-8eb7-69e90f3754fa rw loglevel=3 quiet resume=/dev/disk/by-uuid/42837e7a-845e-475a-8315-b31d4efc25d6
+        initrd /intel-ucode.img /initramfs-linux.img
+    }
 
-menuentry 'Windows 11' --class windows --class os $menuentry_id_option {
-    savedefault
-    insmod part_gpt
-    insmod fat
-    search --no-floppy --fs-uuid --set=root 78FE-DD96
-    chainloader /efi/Microsoft/Boot/bootmgfw.efi
-}
+    menuentry 'Windows 11' --class windows --class os $menuentry_id_option {
+        savedefault
+        insmod part_gpt
+        insmod fat
+        search --no-floppy --fs-uuid --set=root 78FE-DD96
+        chainloader /efi/Microsoft/Boot/bootmgfw.efi
+    }
   '';
 
-  swapDevices = [
-    { device = "/dev/disk/by-uuid/99a71219-fd36-4bc7-824b-9b048aedd575"; }
-  ];
+  swapDevices =
+    [{ device = "/dev/disk/by-uuid/99a71219-fd36-4bc7-824b-9b048aedd575"; }];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
@@ -79,7 +75,8 @@ menuentry 'Windows 11' --class windows --class os $menuentry_id_option {
   # networking.interfaces.wlo1.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  hardware.cpu.intel.updateMicrocode =
+    lib.mkDefault config.hardware.enableRedistributableFirmware;
 
   hardware.nvidia.prime = {
     offload = {

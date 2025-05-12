@@ -25,12 +25,11 @@
     ./keyd.nix
   ];
 
-### NixOS special options
+  ### NixOS special options
   system.copySystemConfiguration = true;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-    "nvidia-settings" "nvidia-x11"
-  ];
+  nixpkgs.config.allowUnfreePredicate = pkg:
+    builtins.elem (lib.getName pkg) [ "nvidia-settings" "nvidia-x11" ];
   nix.gc = {
     automatic = true;
     dates = "weekly";
@@ -42,7 +41,7 @@
     dates = [ "monthly" ];
   };
 
-### Boot
+  ### Boot
   boot.loader = {
     efi = {
       canTouchEfiVariables = true;
@@ -61,7 +60,7 @@
     };
   };
 
-### System
+  ### System
   i18n.defaultLocale = "en_US.UTF-8";
   console = {
     packages = with pkgs; [ terminus_font ];
@@ -76,16 +75,18 @@
   ### Fonts
   fonts = {
     enableDefaultPackages = true;
-    packages = with pkgs; [
-      noto-fonts
-      roboto roboto-slab roboto-mono roboto-flex roboto-serif
-    ] ++ (with pkgs.nerd-fonts; [
-      symbols-only
-      caskaydia-cove caskaydia-mono
-      iosevka iosevka-term iosevka-term-slab
-      jetbrains-mono
-      comic-shanns-mono
-    ]);
+    packages = with pkgs;
+      [ noto-fonts roboto roboto-slab roboto-mono roboto-flex roboto-serif ]
+      ++ (with pkgs.nerd-fonts; [
+        symbols-only
+        caskaydia-cove
+        caskaydia-mono
+        iosevka
+        iosevka-term
+        iosevka-term-slab
+        jetbrains-mono
+        comic-shanns-mono
+      ]);
 
     fontconfig.defaultFonts = {
       serif = [ "Roboto Serif" "Noto Serif" ];
@@ -100,7 +101,7 @@
 
   services.xserver.xkb.options = "grp:win_space_toggle,shift:both_shiftlock";
 
-### Users & Groups
+  ### Users & Groups
   users.groups.nixos.members = [ "root" "dio" ];
 
   users.users.dio = {
@@ -113,17 +114,11 @@
     shell = pkgs.fish;
     # start session at boot rather then at login
     linger = true;
-    extraGroups = [
-      "wheel"
-      "networkmanager"
-    ];
-    packages = with pkgs; [
-      home-manager
-    ];
+    extraGroups = [ "wheel" "networkmanager" ];
+    packages = with pkgs; [ home-manager ];
   };
 
-
-### Uncon-figured out (yet)
+  ### Uncon-figured out (yet)
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
@@ -138,9 +133,10 @@
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
-
-
-
+  #
+  #
+  #
+  #
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
   #

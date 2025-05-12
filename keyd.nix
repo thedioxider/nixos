@@ -1,5 +1,4 @@
-{ ... }:
-{
+{ ... }: {
   services.keyd = {
     enable = true;
     keyboards = {
@@ -11,9 +10,7 @@
             rightalt = "layer(movements)";
             "leftmeta + leftalt" = "layer(media)";
           };
-          shift = {
-            capslock = "capslock";
-          };
+          shift = { capslock = "capslock"; };
           movements = {
             h = "left";
             j = "down";
