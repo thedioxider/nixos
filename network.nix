@@ -57,14 +57,15 @@
             key-mgmt = "wpa-psk";
           };
         }
-        // lib.optionalAttrs (security == "wpa-enterprise")
-        (assert lib.assertMsg (eap-auth != null)
+        // lib.optionalAttrs (security == "wpa-enterprise") (
+          assert lib.assertMsg (eap-auth != null)
           ''eap-identity is required: ${id}'';
-            wpaEnterpriseProfile eap-auth)
+            wpaEnterpriseProfile eap-auth
+        )
       );
   wpaEnterpriseProfile = {
     eap ? "peap", # Type of enterprice connection
-    ca-cert, # If path to file, should start with file://
+    ca-cert,
     identity,
     password,
     ...
@@ -77,7 +78,12 @@
       supported: ${builtins.concatStringsSep ", " supported_eap}
     ''; {
       wifi-security = {key-mgmt = "wpa-eap";};
-      "802-1x" = {inherit eap ca-cert identity password;};
+      "802-1x" =
+        {
+          inherit eap ca-cert identity password;
+        }
+        // lib.optionalAttrs (eap == "peap")
+        {phase2-auth = "mschapv2";};
     };
 
   # all the connections can be stored externally in json
