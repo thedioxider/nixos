@@ -9,7 +9,11 @@
     })
   ];
 
-  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+  environment.sessionVariables = {
+    NIXOS_OZONE_WL = "1";
+    # https://wiki.hyprland.org/Configuring/Multi-GPU/
+    AQ_DRM_DEVICES = "/dev/dri/card1:/dev/dri/card0";
+  };
 
   services.displayManager.sddm = {
     enable = true;

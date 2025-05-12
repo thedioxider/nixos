@@ -1,4 +1,12 @@
-{ lib, pkgs, ... }: {
+{ lib, pkgs, ... }:
+let
+  sops-nix = builtins.getFlake "github:Mic92/sops-nix";
+in {
+  imports = [
+    sops-nix.nixosModules.sops
+  ];
+
+
 ### Programs, Services & Environment
   programs = {
     command-not-found       .enable = false;
@@ -18,6 +26,10 @@
     partition-manager       .enable = true;
     rog-control-center      .enable = true;
     yazi                    .enable = true;
+    appimage = {
+      enable = true;
+      binfmt = true;
+    };
   };
 
   services = {};
@@ -26,6 +38,10 @@
 
   environment.systemPackages = with pkgs; [
     gcc
+    ffmpeg
+    age
+    ssh-to-age
+    sops
     wl-clipboard
     trashy
     parted
@@ -33,4 +49,22 @@
     p7zip
     calc
   ];
+
+  environment.variables = {
+    EDITOR = "nvim";
+  };
+
+
+### Encryption & Secrets
+  sops = let
+    secrets-store_path = /etc/secrets/store.yaml;
+  in
+    lib.optionalAttrs (builtins.pathExists secrets-store_path) {
+      defaultSopsFile = secrets-store_path;
+      age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+
+      secrets = {
+        hello = {};
+      };
+    };
 }

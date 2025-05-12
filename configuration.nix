@@ -6,6 +6,9 @@
     ### Power management & Sleep configs
     ./power.nix
 
+    ### Network
+    ./network.nix
+
     ### Graphics card setup & drivers
     ./graphics.nix
 
@@ -52,6 +55,9 @@
       device = "nodev";
       timeoutStyle = "menu";
       default = "saved";
+      extraConfig = ''
+        GRUB_CMDLINE_LINUX="acpi_sleep=nonvs"
+      '';
     };
   };
 
@@ -64,7 +70,6 @@
   };
 
   networking.hostName = "diomentia";
-  networking.networkmanager.enable = true;
 
   time.timeZone = "Europe/Moscow";
 
@@ -92,9 +97,6 @@
 
   services.libinput.enable = true;
   services.printing.enable = true;
-
-  # enable the OpenSSH daemon
-  # services.openssh.enable = true;
 
   services.xserver.xkb.options = "grp:win_space_toggle,shift:both_shiftlock";
 
