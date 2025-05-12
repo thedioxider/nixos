@@ -88,6 +88,7 @@
 
   # all the connections can be stored externally in json
   connections_config = /etc/secrets/network/connections.json;
+  # connections_config = ./secrets/example/network/connections.json;
   profiles = builtins.mapAttrs (n: v: nmProfile ({id = n;} // v)) (
     {
       dendobriy = {
@@ -109,8 +110,10 @@
     lib.optional (builtins.pathExists config.sops.secrets.network-credentials.path)
     config.sops.secrets.network-credentials.path;
 in {
+  # sops.age.sshKeyPaths = ["${./secrets/example/example_ssh}"];
   sops.secrets = let
     network-credentials_path = /etc/secrets/network/credentials.env;
+    # network-credentials_path = ./secrets/example/network/credentials.env;
   in
     lib.optionalAttrs (builtins.pathExists network-credentials_path) {
       network-credentials = {
