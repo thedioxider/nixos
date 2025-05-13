@@ -2,7 +2,6 @@
   environment.systemPackages = with pkgs; [
     egl-wayland
     swaynotificationcenter
-    hyprpolkitagent
 
     (catppuccin-sddm.override { flavor = "macchiato"; })
   ];
