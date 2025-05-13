@@ -12,7 +12,7 @@
 
     # turns off GPU when not in use
     powerManagement = {
-      enable = true;
+      enable = false;
       finegrained = true;
     };
 

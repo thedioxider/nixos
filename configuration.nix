@@ -54,9 +54,6 @@
       device = "nodev";
       timeoutStyle = "menu";
       default = "saved";
-      extraConfig = ''
-        GRUB_CMDLINE_LINUX="acpi_sleep=nonvs"
-      '';
     };
   };
 

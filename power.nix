@@ -35,7 +35,7 @@
     HandlePowerKey=hibernate
     HandlePowerKeyLongPress=poweroff
     HandleSuspendKey=hybrid-sleep
-    HandleSuspendKeyLongPress=hibernate
+    HandleSuspendKeyLongPress=reboot
     HandleLidSwitch=sleep
     HandleLidSwitchExternalPower=sleep
     HandleLidSwitchDocked=ignore
