@@ -38,10 +38,10 @@ let
         inherit ssid;
         mode = "infrastructure";
       };
-      wifi-security = { auth-alg = "open"; };
     } // lib.optionalAttrs (security == "wpa-personal") {
       wifi-security = {
         inherit psk;
+        auth-alg = "open";
         key-mgmt = "wpa-psk";
       };
     } // lib.optionalAttrs (security == "wpa-enterprise")
@@ -55,7 +55,10 @@ let
       unknown EAP: ${eap}
       supported: ${builtins.concatStringsSep ", " supported_eap}
     ''; {
-      wifi-security = { key-mgmt = "wpa-eap"; };
+      wifi-security = {
+        auth-alg = "open";
+        key-mgmt = "wpa-eap";
+      };
       "802-1x" = {
         inherit eap ca-cert identity password;
       } // lib.optionalAttrs (eap == "peap") { phase2-auth = "mschapv2"; };
