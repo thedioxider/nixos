@@ -31,10 +31,10 @@
     IdleAction=sleep
     IdleActionSec=5min
     InhibitDelayMaxSec=15s
-    SleepOperation=suspend-then-hibernate hybrid-sleep suspend
+    SleepOperation=suspend
     HandlePowerKey=hibernate
     HandlePowerKeyLongPress=poweroff
-    HandleSuspendKey=hybrid-sleep
+    HandleSuspendKey=suspend
     HandleSuspendKeyLongPress=reboot
     HandleLidSwitch=sleep
     HandleLidSwitchExternalPower=sleep

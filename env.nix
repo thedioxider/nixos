@@ -33,6 +33,7 @@ in {
   environment.shellAliases = { };
 
   environment.systemPackages = with pkgs; [
+    brightnessctl
     gcc
     ffmpeg
     age

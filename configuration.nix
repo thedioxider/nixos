@@ -69,7 +69,12 @@
 
   time.timeZone = "Europe/Moscow";
 
-  ### Fonts
+  services.libinput.enable = true;
+  services.printing.enable = true;
+
+  services.xserver.xkb.options = "grp:win_space_toggle,shift:both_shiftlock";
+
+  # Fonts
   fonts = {
     enableDefaultPackages = true;
     packages = with pkgs;
@@ -92,11 +97,6 @@
       emoji = [ "Noto Emoji" ];
     };
   };
-
-  services.libinput.enable = true;
-  services.printing.enable = true;
-
-  services.xserver.xkb.options = "grp:win_space_toggle,shift:both_shiftlock";
 
   ### Users & Groups
   users.groups.nixos.members = [ "root" "dio" ];

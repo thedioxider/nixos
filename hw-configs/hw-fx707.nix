@@ -65,6 +65,7 @@ in {
 
   swapDevices =
     [{ device = "/dev/disk/by-uuid/99a71219-fd36-4bc7-824b-9b048aedd575"; }];
+  boot.resumeDevice = "/dev/disk/by-uuid/99a71219-fd36-4bc7-824b-9b048aedd575";
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
@@ -86,6 +87,9 @@ in {
     intelBusId = "PCI:0:2:0";
     nvidiaBusId = "PCI:1:0:0";
   };
+
+  # load nvidia driver for Xorg and Wayland
+  services.xserver.videoDrivers = [ "nvidia" "i915" ];
 
   hardware.bluetooth.enable = true;
 

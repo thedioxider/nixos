@@ -2,9 +2,6 @@
   # enable OpenGL
   hardware.graphics = { enable = true; };
 
-  # load nvidia driver for Xorg and Wayland
-  services.xserver.videoDrivers = [ "nvidia" "modesetting" ];
-
   hardware.nvidia = {
     modesetting.enable = true;
 
@@ -12,7 +9,7 @@
 
     # turns off GPU when not in use
     powerManagement = {
-      enable = false;
+      enable = true;
       finegrained = true;
     };
 
