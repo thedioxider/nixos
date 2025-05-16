@@ -28,7 +28,7 @@ in {
     };
   };
 
-  services = { };
+  services = { flatpak.enable = true; };
 
   environment.shellAliases = { };
 
