@@ -35,6 +35,7 @@ in {
   environment.systemPackages = with pkgs; [
     brightnessctl
     gcc
+    jq
     ffmpeg
     age
     ssh-to-age
