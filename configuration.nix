@@ -65,7 +65,7 @@
     useXkbConfig = true;
   };
 
-  networking.hostName = "diomentia";
+  networking.hostName = "miementa";
 
   time.timeZone = "Europe/Moscow";
 
