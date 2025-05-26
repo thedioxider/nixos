@@ -26,6 +26,7 @@ in {
       enable = true;
       binfmt = true;
     };
+    amnezia-vpn.enable = true;
   };
 
   services = { flatpak.enable = true; };
