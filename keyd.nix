@@ -9,8 +9,14 @@
             capslock = "esc";
             rightalt = "layer(movements)";
             "leftmeta + leftalt" = "layer(media)";
+            "[" = "(";
+            "]" = ")";
           };
-          shift = { capslock = "capslock"; };
+          shift = {
+            capslock = "capslock";
+            "9" = "[";
+            "0" = "]";
+          };
           movements = {
             h = "left";
             j = "down";
