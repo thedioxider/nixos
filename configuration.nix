@@ -74,14 +74,10 @@
 
   services.xserver.xkb.options = "grp:win_space_toggle,shift:both_shiftlock";
 
-  virtualisation.docker = {
+  virtualisation.podman = {
     enable = true;
-    daemon.settings = { dns = [ "1.1.1.1" "8.8.8.8" ]; };
-    rootless = {
-      enable = true;
-      setSocketVariable = true;
-      daemon.settings = { dns = [ "1.1.1.1" "8.8.8.8" ]; };
-    };
+    dockerCompat = true;
+    defaultNetwork.settings.dns_enabled = true;
   };
 
   # Fonts

@@ -47,6 +47,9 @@ in {
     gparted
     p7zip
     calc
+    dive
+    podman-tui
+    podman-compose
   ];
 
   environment.variables = { EDITOR = "nvim"; };
