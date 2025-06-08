@@ -50,6 +50,7 @@ in {
     dive
     podman-tui
     podman-compose
+    distrobox
   ];
 
   environment.variables = { EDITOR = "nvim"; };
