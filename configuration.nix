@@ -58,7 +58,10 @@
   };
 
   ### System
-  i18n.defaultLocale = "en_US.UTF-8";
+  i18n = {
+    defaultLocale = "C.UTF-8";
+    extraLocaleSettings = { LC_TIME = "ru_RU.UTF-8"; };
+  };
   console = {
     packages = with pkgs; [ terminus_font ];
     font = "ter-120b";
