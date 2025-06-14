@@ -94,4 +94,9 @@ in {
   hardware.bluetooth.enable = true;
 
   services.xserver.xkb.layout = "us,ru";
+
+  hardware.opentabletdriver = {
+    enable = true;
+    daemon.enable = true;
+  };
 }
