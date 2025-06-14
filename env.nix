@@ -38,6 +38,8 @@ in {
     gcc
     jq
     ffmpeg
+    zip
+    unzip
     age
     ssh-to-age
     sops
