@@ -3,7 +3,8 @@
     egl-wayland
     swaynotificationcenter
 
-    (catppuccin-sddm.override { flavor = "macchiato"; })
+    # (catppuccin-sddm.override { flavor = "macchiato"; })
+    where-is-my-sddm-theme
   ];
 
   environment.sessionVariables = {
@@ -16,7 +17,8 @@
     enable = true;
     wayland.enable = true;
     package = pkgs.kdePackages.sddm;
-    theme = "catppuccin-macchiato";
+    extraPackages = [ pkgs.qt6.qt5compat ];
+    theme = "where_is_my_sddm_theme";
   };
 
   services.pipewire = {
