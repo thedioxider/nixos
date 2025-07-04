@@ -106,6 +106,20 @@ in {
     };
   };
 
+  # required for DHCP to function
+  networking.firewall.allowedUDPPorts = [ 53 67 ];
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+    nssmdns6 = true;
+  };
+  users.groups.avahi-autoipd.name = "avahi-autoipd";
+  users.users.avahi-autoipd = {
+    isNormalUser = true;
+    home = "/var/lib/avahi-autoipd";
+    group = "avahi-autoipd";
+  };
+
   # enable the OpenSSH daemon
   # services.openssh.enable = true;
 }
