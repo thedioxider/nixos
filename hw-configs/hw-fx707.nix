@@ -12,7 +12,7 @@ in {
     [ "xhci_pci" "thunderbolt" "vmd" "nvme" "usb_storage" "sd_mod" "sr_mod" ];
   boot.initrd.kernelModules = [ "i915" ];
   boot.kernelModules = [ "kvm-intel" ];
-  boot.extraModulePackages = [ ];
+  boot.extraModulePackages = with config.boot.kernelPackages; [ ];
   boot.kernelPatches = [{
     name = "asus-armoury";
     patch = asus-armoury;
@@ -95,8 +95,8 @@ in {
 
   services.xserver.xkb.layout = "us,ru";
 
-  hardware.opentabletdriver = {
-    enable = true;
-    daemon.enable = true;
-  };
+  # hardware.opentabletdriver = {
+  #   enable = true;
+  #   daemon.enable = true;
+  # };
 }

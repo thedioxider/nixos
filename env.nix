@@ -53,6 +53,7 @@ in {
     podman-tui
     podman-compose
     distrobox
+    exfatprogs
   ];
 
   environment.variables = { EDITOR = "nvim"; };

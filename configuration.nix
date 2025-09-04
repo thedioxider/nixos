@@ -119,7 +119,7 @@
     useDefaultShell = false;
     shell = pkgs.fish;
     # start session at boot rather then at login
-    linger = true;
+    linger = false;
     extraGroups = [ "wheel" "networkmanager" ];
     packages = with pkgs; [ home-manager ];
   };
