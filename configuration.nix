@@ -29,7 +29,11 @@
   system.copySystemConfiguration = true;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nixpkgs.config.allowUnfreePredicate = pkg:
-    builtins.elem (lib.getName pkg) [ "nvidia-settings" "nvidia-x11" ];
+    builtins.elem (lib.getName pkg) [
+      "nvidia-settings"
+      "nvidia-x11"
+      "zerotierone"
+    ];
   nix.gc = {
     automatic = true;
     dates = "weekly";
@@ -77,6 +81,7 @@
 
   services.xserver.xkb.options = "grp:win_space_toggle,shift:both_shiftlock";
 
+  security.lsm = lib.mkForce [ ];
   virtualisation.podman = {
     enable = true;
     dockerCompat = true;
