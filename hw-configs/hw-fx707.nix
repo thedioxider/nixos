@@ -13,10 +13,10 @@ in {
   boot.initrd.kernelModules = [ "i915" ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = with config.boot.kernelPackages; [ ];
-  boot.kernelPatches = [{
-    name = "asus-armoury";
-    patch = asus-armoury;
-  }];
+  # boot.kernelPatches = [{
+  #   name = "asus-armoury";
+  #   patch = asus-armoury;
+  # }];
 
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/5656b356-ca2f-4776-bc58-6f04094316f2";
