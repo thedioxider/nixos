@@ -1,6 +1,8 @@
 { config, lib, pkgs, ... }: {
   # enable OpenGL
-  hardware.graphics = { enable = true; };
+  hardware.graphics.enable = true;
+
+  nixpkgs.config.cudaSupport = true;
 
   hardware.nvidia = {
     modesetting.enable = true;
