@@ -108,7 +108,9 @@ in {
 
   # required for DHCP to function
   networking.firewall = {
-    allowedUDPPorts = [ 53 67 ];
+    enable = true;
+    allowedUDPPorts = [ 53 67 111 2049 7667 8090 8082 ];
+    allowedTCPPorts = [ 111 2049 ];
     extraCommands = ''
       iptables -A INPUT -p udp -s 224.0.0.0/4 -j ACCEPT
       iptables -A INPUT -p udp -d 224.0.0.0/4 -j ACCEPT
@@ -128,5 +130,5 @@ in {
   # };
 
   # enable the OpenSSH daemon
-  # services.openssh.enable = true;
+  services.openssh.enable = true;
 }
