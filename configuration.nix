@@ -28,12 +28,6 @@
   ### NixOS special options
   system.copySystemConfiguration = true;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  nixpkgs.config.allowUnfreePredicate = pkg:
-    builtins.elem (lib.getName pkg) [
-      "nvidia-settings"
-      "nvidia-x11"
-      "zerotierone"
-    ];
   nix.gc = {
     automatic = true;
     dates = "weekly";
@@ -125,7 +119,8 @@
     shell = pkgs.fish;
     # start session at boot rather then at login
     linger = false;
-    extraGroups = [ "wheel" "networkmanager" ];
+    extraGroups =
+      [ "wheel" "networkmanager" "kvm" "adbusers" "dialout" "video" ];
     packages = with pkgs; [ home-manager ];
   };
 

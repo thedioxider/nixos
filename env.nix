@@ -3,6 +3,19 @@ let sops-nix = builtins.getFlake "github:Mic92/sops-nix";
 in {
   imports = [ sops-nix.nixosModules.sops ];
 
+  nixpkgs.config.allowUnfreePredicate = pkg:
+    (builtins.elem (lib.getName pkg) [
+      "nvidia-settings"
+      "nvidia-x11"
+      "cuda-merged"
+      "libnvjitlink"
+      "libnpp"
+      "zerotierone"
+      "steam"
+      "steam-unwrapped"
+    ]) || (builtins.match "^(cuda_[a-z_]+)|(libcu[a-z]+)$" (lib.getName pkg))
+    != null;
+
   ### Programs, Services & Environment
   programs = {
     command-not-found.enable = false;
@@ -27,6 +40,8 @@ in {
       binfmt = true;
     };
     amnezia-vpn.enable = true;
+    adb.enable = true;
+    steam.enable = true;
   };
 
   services = { flatpak.enable = true; };
@@ -37,6 +52,8 @@ in {
     brightnessctl
     gcc
     jq
+    wget
+    curl
     ffmpeg
     zip
     unzip
@@ -54,6 +71,10 @@ in {
     podman-compose
     distrobox
     exfatprogs
+    xorg.xhost
+    libGL
+    glib
+    cudatoolkit
   ];
 
   environment.variables = { EDITOR = "nvim"; };
