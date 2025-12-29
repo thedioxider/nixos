@@ -27,17 +27,17 @@
     #HibernateDelaySec=1hr
   '';
 
-  services.logind.extraConfig = ''
-    IdleAction=sleep
-    IdleActionSec=5min
-    InhibitDelayMaxSec=15s
-    SleepOperation=suspend
-    HandlePowerKey=hibernate
-    HandlePowerKeyLongPress=poweroff
-    HandleSuspendKey=suspend
-    HandleSuspendKeyLongPress=reboot
-    HandleLidSwitch=sleep
-    HandleLidSwitchExternalPower=sleep
-    HandleLidSwitchDocked=ignore
-  '';
+  services.logind.settings.Login = {
+    IdleAction = "sleep";
+    IdleActionSec = "5min";
+    InhibitDelayMaxSec = "15s";
+    SleepOperation = "suspend";
+    HandlePowerKey = "hibernate";
+    HandlePowerKeyLongPress = "poweroff";
+    HandleSuspendKey = "suspend";
+    HandleSuspendKeyLongPress = "reboot";
+    HandleLidSwitch = "sleep";
+    HandleLidSwitchExternalPower = "sleep";
+    HandleLidSwitchDocked = "ignore";
+  };
 }

@@ -1,8 +1,4 @@
-{ lib, pkgs, ... }:
-let sops-nix = builtins.getFlake "github:Mic92/sops-nix";
-in {
-  imports = [ sops-nix.nixosModules.sops ];
-
+{ lib, pkgs, inputs, ... }: {
   nixpkgs.config.allowUnfreePredicate = pkg:
     (builtins.elem (lib.getName pkg) [
       "nvidia-settings"
@@ -80,7 +76,7 @@ in {
   environment.variables = { EDITOR = "nvim"; };
 
   ### Encryption & Secrets
-  sops = let secrets-store_path = /etc/secrets/store.yaml;
+  sops = let secrets-store_path = "${inputs.secrets-dir}/store.yaml";
   in lib.optionalAttrs (builtins.pathExists secrets-store_path) {
     defaultSopsFile = secrets-store_path;
     age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];

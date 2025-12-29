@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, inputs, ... }:
 let
   nmProfile = { id # Name of a network displayed in system
     , ptype ? "wifi" # Profile type
@@ -65,7 +65,7 @@ let
     };
 
   # all the connections can be stored externally in json
-  connections_config = /etc/secrets/network/connections.json;
+  connections_config = "${inputs.secrets-dir}/network/connections.json";
   # connections_config = ./secrets/example/network/connections.json;
   profiles = builtins.mapAttrs (n: v: nmProfile ({ id = n; } // v)) ({
     dendobriy = {
@@ -87,7 +87,7 @@ let
 in {
   # sops.age.sshKeyPaths = ["${./secrets/example/example_ssh}"];
   sops.secrets = let
-    network-credentials_path = /etc/secrets/network/credentials.env;
+    network-credentials_path = "${inputs.secrets-dir}/network/credentials.env";
     # network-credentials_path = ./secrets/example/network/credentials.env;
   in lib.optionalAttrs (builtins.pathExists network-credentials_path) {
     network-credentials = {
