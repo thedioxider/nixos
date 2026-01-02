@@ -81,9 +81,7 @@ let
     (builtins.fromJSON (builtins.readFile connections_config)));
 
   # secrets stored in form of environment variables
-  env_secrets = lib.optional
-    (builtins.pathExists config.sops.secrets.network-credentials.path)
-    config.sops.secrets.network-credentials.path;
+  env_secrets = config.sops.secrets.network-credentials.path;
 in {
   # sops.age.sshKeyPaths = ["${./secrets/example/example_ssh}"];
   sops.secrets = let
@@ -102,7 +100,7 @@ in {
     # wifi.powersave = true;
     ensureProfiles = {
       inherit profiles;
-      environmentFiles = env_secrets;
+      environmentFiles = [ env_secrets ];
     };
   };
 
@@ -130,5 +128,5 @@ in {
   # };
 
   # enable the OpenSSH daemon
-  services.openssh.enable = true;
+  # services.openssh.enable = true;
 }

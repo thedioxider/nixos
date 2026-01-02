@@ -94,7 +94,7 @@
     linger = false;
     extraGroups =
       [ "wheel" "networkmanager" "kvm" "adbusers" "dialout" "video" ];
-    packages = with pkgs; [ home-manager ];
+    packages = with pkgs; [ ];
   };
 
   ### Uncon-figured out (yet)
