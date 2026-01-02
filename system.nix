@@ -1,32 +1,5 @@
 { config, lib, pkgs, ... }: {
-  imports = [
-    ### Hardware-dependent options
-    ./hardware-configuration.nix
-
-    ### Power management & Sleep configs
-    ./power.nix
-
-    ### Network
-    ./network.nix
-
-    ### Graphics card setup & drivers
-    ./graphics.nix
-
-    ### Programs, Services & Environment
-    ./env.nix
-
-    ### Plasma Desktop
-    # ./plasma.nix
-
-    ### Hyprland
-    ./hyprland.nix
-
-    ### keyd remapping service setup
-    ./keyd.nix
-  ];
-
   ### NixOS special options
-  system.copySystemConfiguration = true;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.gc = {
     automatic = true;
@@ -121,7 +94,7 @@
     linger = false;
     extraGroups =
       [ "wheel" "networkmanager" "kvm" "adbusers" "dialout" "video" ];
-    packages = with pkgs; [ home-manager ];
+    packages = with pkgs; [ ];
   };
 
   ### Uncon-figured out (yet)
