@@ -1,11 +1,12 @@
 { config, lib, pkgs, ... }: {
   ### NixOS special options
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  nix.gc = {
-    automatic = true;
-    dates = "weekly";
-    persistent = true;
-    options = "--delete-older-than 90d";
+  services.nix-sweep = {
+    enable = true;
+    interval = "weekly";
+    removeOlder = "7d";
+    keepMin = 5;
+    keepMax = 20;
   };
   nix.optimise = {
     automatic = true;

@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-25.11";
+    nix-sweep.url = "github:jzbor/nix-sweep";
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -50,6 +51,7 @@
         ./keyd.nix
 
         ### Other
+        inputs.nix-sweep.nixosModules.default
         inputs.sops-nix.nixosModules.sops
       ];
     };
