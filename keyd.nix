@@ -1,4 +1,9 @@
 { ... }: {
+  # fixes fn keys on some keyboards
+  boot.extraModprobeConfig = ''
+    options hid_apple fnmode=0
+  '';
+
   services.keyd = {
     enable = true;
     keyboards = {
