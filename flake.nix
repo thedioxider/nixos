@@ -12,6 +12,11 @@
       url = "path:/etc/secrets";
       flake = false;
     };
+    hyprland = {
+      url = "github:hyprwm/Hyprland/v0.53.3";
+      # does not work on unstable yet
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   nixConfig = { max-jobs = "auto"; };
@@ -51,6 +56,7 @@
         ./keyd.nix
 
         ### Other
+        inputs.hyprland.nixosModules.default
         inputs.nix-sweep.nixosModules.default
         inputs.sops-nix.nixosModules.sops
       ];
