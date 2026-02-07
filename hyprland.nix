@@ -1,4 +1,6 @@
-{ lib, pkgs, ... }: {
+{ lib, pkgs, inputs, ... }:
+let hyprland-pkgs = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system};
+in {
   environment.systemPackages = with pkgs; [
     egl-wayland
     swaynotificationcenter
@@ -30,5 +32,9 @@
     enable = true;
     xwayland.enable = true;
     withUWSM = true;
+    package = hyprland-pkgs.hyprland;
+    portalPackage = hyprland-pkgs.xdg-desktop-portal-hyprland;
   };
+
+  services.hypridle.enable = true;
 }
