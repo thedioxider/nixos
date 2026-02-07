@@ -1,6 +1,15 @@
-{ config, lib, pkgs, ... }: {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
   ### NixOS special options
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
   services.nix-sweep = {
     enable = true;
     interval = "weekly";
@@ -32,7 +41,9 @@
   ### System
   i18n = {
     defaultLocale = "C.UTF-8";
-    extraLocaleSettings = { LC_TIME = "ru_RU.UTF-8"; };
+    extraLocaleSettings = {
+      LC_TIME = "ru_RU.UTF-8";
+    };
   };
   console = {
     packages = with pkgs; [ terminus_font ];
@@ -59,8 +70,16 @@
   # Fonts
   fonts = {
     enableDefaultPackages = true;
-    packages = with pkgs;
-      [ noto-fonts roboto roboto-slab roboto-mono roboto-flex roboto-serif ]
+    packages =
+      with pkgs;
+      [
+        noto-fonts
+        roboto
+        roboto-slab
+        roboto-mono
+        roboto-flex
+        roboto-serif
+      ]
       ++ (with pkgs.nerd-fonts; [
         symbols-only
         caskaydia-cove
@@ -73,28 +92,46 @@
       ]);
 
     fontconfig.defaultFonts = {
-      serif = [ "Roboto Serif" "Noto Serif" ];
-      sansSerif = [ "Roboto Sans" "Noto Sans" ];
-      monospace = [ "CaskaydiaCove Nerd Font" "Roboto Mono" "Noto Sans Mono" ];
+      serif = [
+        "Roboto Serif"
+        "Noto Serif"
+      ];
+      sansSerif = [
+        "Roboto Sans"
+        "Noto Sans"
+      ];
+      monospace = [
+        "CaskaydiaCove Nerd Font"
+        "Roboto Mono"
+        "Noto Sans Mono"
+      ];
       emoji = [ "Noto Emoji" ];
     };
   };
 
   ### Users & Groups
-  users.groups.nixos.members = [ "root" "dio" ];
+  users.groups.nixos.members = [
+    "root"
+    "dio"
+  ];
 
   users.users.dio = {
     description = "Demetrius R.";
     isNormalUser = true;
     uid = 1134;
-    initialHashedPassword =
-      "$y$j9T$mH5EZb/OBF8ACbwFGIEHa1$5Cw0t9dqll73lpN2vATJU9RW03/MWlPs.PwpgrZd0m0";
+    initialHashedPassword = "$y$j9T$mH5EZb/OBF8ACbwFGIEHa1$5Cw0t9dqll73lpN2vATJU9RW03/MWlPs.PwpgrZd0m0";
     useDefaultShell = false;
     shell = pkgs.fish;
     # start session at boot rather then at login
     linger = false;
-    extraGroups =
-      [ "wheel" "networkmanager" "kvm" "adbusers" "dialout" "video" ];
+    extraGroups = [
+      "wheel"
+      "networkmanager"
+      "kvm"
+      "adbusers"
+      "dialout"
+      "video"
+    ];
     packages = with pkgs; [ ];
   };
 

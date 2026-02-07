@@ -1,6 +1,13 @@
-{ lib, pkgs, inputs, ... }:
-let hyprland-pkgs = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system};
-in {
+{
+  lib,
+  pkgs,
+  inputs,
+  ...
+}:
+let
+  hyprland-pkgs = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system};
+in
+{
   environment.systemPackages = with pkgs; [
     egl-wayland
     swaynotificationcenter

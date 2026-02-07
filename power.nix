@@ -1,4 +1,5 @@
-{ ... }: {
+{ ... }:
+{
   powerManagement = {
     enable = true;
     # power consumption analysis for Intel laptops

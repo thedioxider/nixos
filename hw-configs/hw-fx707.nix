@@ -1,15 +1,28 @@
-{ config, lib, pkgs, modulesPath, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  modulesPath,
+  ...
+}:
 let
   asus-armoury = pkgs.fetchurl {
-    url =
-      "https://lore.kernel.org/all/20240926092952.1284435-1-luke@ljones.dev/t.mbox.gz";
+    url = "https://lore.kernel.org/all/20240926092952.1284435-1-luke@ljones.dev/t.mbox.gz";
     hash = "sha256-E6KdDvvyHiLUWWO/PAHXMtIDGFG0c7ZfAeohlhJtjwI=";
   };
-in {
+in
+{
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
-  boot.initrd.availableKernelModules =
-    [ "xhci_pci" "thunderbolt" "vmd" "nvme" "usb_storage" "sd_mod" "sr_mod" ];
+  boot.initrd.availableKernelModules = [
+    "xhci_pci"
+    "thunderbolt"
+    "vmd"
+    "nvme"
+    "usb_storage"
+    "sd_mod"
+    "sr_mod"
+  ];
   boot.initrd.kernelModules = [ "i915" ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = with config.boot.kernelPackages; [ ];
@@ -26,7 +39,10 @@ in {
   fileSystems."/efi" = {
     device = "/dev/disk/by-uuid/9F38-9C03";
     fsType = "vfat";
-    options = [ "fmask=0022" "dmask=0022" ];
+    options = [
+      "fmask=0022"
+      "dmask=0022"
+    ];
   };
 
   fileSystems."/dsk/win/C" = {
@@ -63,8 +79,7 @@ in {
     }
   '';
 
-  swapDevices =
-    [{ device = "/dev/disk/by-uuid/99a71219-fd36-4bc7-824b-9b048aedd575"; }];
+  swapDevices = [ { device = "/dev/disk/by-uuid/99a71219-fd36-4bc7-824b-9b048aedd575"; } ];
   boot.resumeDevice = "/dev/disk/by-uuid/99a71219-fd36-4bc7-824b-9b048aedd575";
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
@@ -76,8 +91,7 @@ in {
   # networking.interfaces.wlo1.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  hardware.cpu.intel.updateMicrocode =
-    lib.mkDefault config.hardware.enableRedistributableFirmware;
+  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
   hardware.nvidia.prime = {
     offload = {
@@ -89,7 +103,10 @@ in {
   };
 
   # load nvidia driver for Xorg and Wayland
-  services.xserver.videoDrivers = [ "nvidia" "i915" ];
+  services.xserver.videoDrivers = [
+    "nvidia"
+    "i915"
+  ];
 
   hardware.bluetooth.enable = true;
 

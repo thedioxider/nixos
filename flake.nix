@@ -19,47 +19,54 @@
     };
   };
 
-  nixConfig = { max-jobs = "auto"; };
-
-  outputs = { self, nixpkgs, ... }@inputs: {
-
-    nixosConfigurations."miementa" = let system = "x86_64-linux";
-    in nixpkgs.lib.nixosSystem {
-      inherit system;
-      specialArgs = { inherit inputs; };
-      modules = [
-        ### Main configurations
-        ./system.nix
-
-        ### Hardware dependant
-        ./hw-configs/hw-fx707.nix
-
-        ### Plasma Desktop
-        # ./plasma.nix
-
-        ### Network
-        ./network.nix
-
-        ### Power management & Sleep configs
-        ./power.nix
-
-        ### Graphics card setup & drivers
-        ./graphics.nix
-
-        ### Programs, Services & Environment
-        ./env.nix
-
-        ### Hyprland
-        ./hyprland.nix
-
-        ### keyd remapping service setup
-        ./keyd.nix
-
-        ### Other
-        inputs.hyprland.nixosModules.default
-        inputs.nix-sweep.nixosModules.default
-        inputs.sops-nix.nixosModules.sops
-      ];
-    };
+  nixConfig = {
+    max-jobs = "auto";
   };
+
+  outputs =
+    { self, nixpkgs, ... }@inputs:
+    {
+
+      nixosConfigurations."miementa" =
+        let
+          system = "x86_64-linux";
+        in
+        nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit inputs; };
+          modules = [
+            ### Main configurations
+            ./system.nix
+
+            ### Hardware dependant
+            ./hw-configs/hw-fx707.nix
+
+            ### Plasma Desktop
+            # ./plasma.nix
+
+            ### Network
+            ./network.nix
+
+            ### Power management & Sleep configs
+            ./power.nix
+
+            ### Graphics card setup & drivers
+            ./graphics.nix
+
+            ### Programs, Services & Environment
+            ./env.nix
+
+            ### Hyprland
+            ./hyprland.nix
+
+            ### keyd remapping service setup
+            ./keyd.nix
+
+            ### Other
+            inputs.hyprland.nixosModules.default
+            inputs.nix-sweep.nixosModules.default
+            inputs.sops-nix.nixosModules.sops
+          ];
+        };
+    };
 }

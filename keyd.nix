@@ -1,4 +1,5 @@
-{ ... }: {
+{ ... }:
+{
   # fixes fn keys on some keyboards
   boot.extraModprobeConfig = ''
     options hid_apple fnmode=0
@@ -15,7 +16,9 @@
             rightalt = "layer(movements)";
             "leftmeta + leftalt" = "layer(media)";
           };
-          shift = { capslock = "capslock"; };
+          shift = {
+            capslock = "capslock";
+          };
           movements = {
             h = "left";
             j = "down";

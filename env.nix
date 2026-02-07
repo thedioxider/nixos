@@ -1,5 +1,12 @@
-{ lib, pkgs, inputs, ... }: {
-  nixpkgs.config.allowUnfreePredicate = pkg:
+{
+  lib,
+  pkgs,
+  inputs,
+  ...
+}:
+{
+  nixpkgs.config.allowUnfreePredicate =
+    pkg:
     (builtins.elem (lib.getName pkg) [
       "nvidia-settings"
       "nvidia-x11"
@@ -9,8 +16,8 @@
       "zerotierone"
       "steam"
       "steam-unwrapped"
-    ]) || (builtins.match "^(cuda_[a-z_]+)|(libcu[a-z]+)$" (lib.getName pkg))
-    != null;
+    ])
+    || (builtins.match "^(cuda_[a-z_]+)|(libcu[a-z]+)$" (lib.getName pkg)) != null;
 
   ### Programs, Services & Environment
   programs = {
@@ -40,7 +47,9 @@
     steam.enable = true;
   };
 
-  services = { flatpak.enable = true; };
+  services = {
+    flatpak.enable = true;
+  };
 
   environment.shellAliases = { };
 
@@ -75,14 +84,21 @@
     helix
   ];
 
-  environment.variables = { EDITOR = "nvim"; };
+  environment.variables = {
+    EDITOR = "nvim";
+  };
 
   ### Encryption & Secrets
-  sops = let secrets-store_path = "${inputs.secrets-dir}/store.yaml";
-  in lib.optionalAttrs (builtins.pathExists secrets-store_path) {
-    defaultSopsFile = secrets-store_path;
-    age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+  sops =
+    let
+      secrets-store_path = "${inputs.secrets-dir}/store.yaml";
+    in
+    lib.optionalAttrs (builtins.pathExists secrets-store_path) {
+      defaultSopsFile = secrets-store_path;
+      age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
 
-    secrets = { hello = { }; };
-  };
+      secrets = {
+        hello = { };
+      };
+    };
 }
