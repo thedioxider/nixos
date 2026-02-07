@@ -72,6 +72,7 @@
     glib
     cudatoolkit
     inputs.nix-sweep.packages.${pkgs.stdenv.hostPlatform.system}.default
+    helix
   ];
 
   environment.variables = { EDITOR = "nvim"; };
