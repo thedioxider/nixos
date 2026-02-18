@@ -13,6 +13,7 @@
       "cuda-merged"
       "libnvjitlink"
       "libnpp"
+      "cudnn"
       "zerotierone"
       "steam"
       "steam-unwrapped"
@@ -22,16 +23,21 @@
   ### Programs, Services & Environment
   programs = {
     command-not-found.enable = false;
-    fish.enable = true;
+    fish = {
+      enable = true;
+      shellAliases = {
+        rm = "rm -i";
+        cp = "cp -i";
+        mv = "mv -i";
+      };
+    };
     git.enable = true;
+    firefox.enable = true;
     # TODO: maybe change to btop++
     htop.enable = true;
     java.enable = true;
     less.enable = true;
-    neovim = {
-      enable = true;
-      defaultEditor = true;
-    };
+    neovim.enable = true;
     nix-index.enable = true;
     nix-ld.enable = true;
     npm.enable = true;
@@ -49,6 +55,10 @@
 
   services = {
     flatpak.enable = true;
+    pipewire = {
+      pulse.enable = true;
+      audio.enable = true;
+    };
   };
 
   environment.shellAliases = { };
@@ -66,7 +76,7 @@
     ssh-to-age
     sops
     wl-clipboard
-    trashy
+    trash-cli
     parted
     gparted
     p7zip
@@ -83,10 +93,6 @@
     inputs.nix-sweep.packages.${pkgs.stdenv.hostPlatform.system}.default
     helix
   ];
-
-  environment.variables = {
-    EDITOR = "nvim";
-  };
 
   ### Encryption & Secrets
   sops =

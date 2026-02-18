@@ -11,7 +11,7 @@
     enable32Bit = true;
   };
 
-  nixpkgs.config.cudaSupport = true;
+  # nixpkgs.config.cudaSupport = true;
 
   hardware.nvidia = {
     modesetting.enable = true;
