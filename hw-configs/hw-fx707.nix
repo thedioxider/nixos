@@ -48,28 +48,15 @@ in
   fileSystems."/dsk/win/C" = {
     device = "/dev/disk/by-uuid/0C06D2E106D2CABA";
     fsType = "ntfs";
+    options = [ "nofail" ];
   };
   fileSystems."/dsk/win/D" = {
     device = "/dev/disk/by-uuid/A876D57A76D54A28";
     fsType = "ntfs";
-  };
-
-  fileSystems."/dsk/arch" = {
-    device = "/dev/disk/by-uuid/a0918439-753b-4e5e-8eb7-69e90f3754fa";
+    options = [ "nofail" ];
   };
 
   boot.loader.grub.extraEntries = ''
-    menuentry 'Arch Linux' --class arch --class gnu-linux --class gnu --class os {
-        savedefault
-        set gfxpayload=keep
-        insmod gzio
-        insmod part_gpt
-        insmod fat
-        search --no-floppy --fs-uuid --set=root 9F38-9C03
-        linux /vmlinuz-linux root=UUID=a0918439-753b-4e5e-8eb7-69e90f3754fa rw loglevel=3 quiet resume=/dev/disk/by-uuid/42837e7a-845e-475a-8315-b31d4efc25d6
-        initrd /intel-ucode.img /initramfs-linux.img
-    }
-
     menuentry 'Windows 11' --class windows --class os $menuentry_id_option {
         savedefault
         insmod part_gpt
@@ -86,7 +73,7 @@ in
   # (the default) this is the recommended approach. When using systemd-networkd it's
   # still possible to use this option, but it's recommended to use it in conjunction
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
-  networking.useDHCP = lib.mkDefault true;
+  # networking.useDHCP = lib.mkDefault true;
   # networking.interfaces.enp55s0.useDHCP = lib.mkDefault true;
   # networking.interfaces.wlo1.useDHCP = lib.mkDefault true;
 
