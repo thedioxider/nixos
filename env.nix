@@ -90,6 +90,7 @@
     cudatoolkit
     inputs.nix-sweep.packages.${pkgs.stdenv.hostPlatform.system}.default
     helix
+    pulsemixer
   ];
 
   ### Encryption & Secrets
