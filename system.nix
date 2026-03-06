@@ -61,10 +61,20 @@
   services.xserver.xkb.options = "grp:win_space_toggle,shift:both_shiftlock";
 
   security.lsm = lib.mkForce [ ];
-  virtualisation.podman = {
+  virtualisation.docker = {
     enable = true;
-    dockerCompat = true;
-    defaultNetwork.settings.dns_enabled = true;
+    rootless = {
+      enable = true;
+      setSocketVariable = true;
+    };
+    enableNvidia = false;
+    daemon.settings = {
+      features.cdi = true;
+      dns = [
+        "8.8.8.8"
+        "1.1.1.1"
+      ];
+    };
   };
 
   # Fonts
@@ -131,8 +141,10 @@
       "adbusers"
       "dialout"
       "video"
+      "disk"
+      "tty"
+      "docker"
     ];
-    packages = with pkgs; [ ];
   };
 
   ### Uncon-figured out (yet)

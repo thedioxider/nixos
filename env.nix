@@ -82,8 +82,6 @@
     p7zip
     calc
     dive
-    podman-tui
-    podman-compose
     distrobox
     exfatprogs
     xorg.xhost
