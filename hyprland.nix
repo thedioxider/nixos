@@ -43,5 +43,4 @@ in
     portalPackage = hyprland-pkgs.xdg-desktop-portal-hyprland;
   };
 
-  services.hypridle.enable = true;
 }
