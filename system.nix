@@ -78,6 +78,11 @@
     };
   };
 
+  virtualisation.podman = {
+    enable = true;
+    defaultNetwork.settings.dns_enabled = true;
+  };
+
   # Fonts
   fonts = {
     enableDefaultPackages = true;
@@ -145,6 +150,7 @@
       "disk"
       "tty"
       "docker"
+      "podman"
     ];
   };
 

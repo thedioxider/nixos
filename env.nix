@@ -91,6 +91,8 @@
     inputs.nix-sweep.packages.${pkgs.stdenv.hostPlatform.system}.default
     helix
     pulsemixer
+    podman-tui
+    podman-compose
   ];
 
   ### Encryption & Secrets
