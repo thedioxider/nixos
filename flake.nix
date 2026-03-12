@@ -53,8 +53,20 @@
             ### Graphics card setup & drivers
             ./graphics.nix
 
-            ### Programs, Services & Environment
+            ### Environment
             ./env.nix
+
+            ### Programs
+            ./programs.nix
+
+            ### System packages & unfree allowlist
+            ./packages.nix
+
+            ### Services
+            ./services.nix
+
+            ### Secrets
+            ./secrets.nix
 
             ### Hyprland
             ./hyprland.nix
