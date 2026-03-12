@@ -11,7 +11,17 @@
     enable32Bit = true;
   };
 
-  # nixpkgs.config.cudaSupport = true;
+  nixpkgs.config.cudaSupport = true;
+  nixpkgs.config.cudaCapabilities = [ "8.9" ];
+  nixpkgs.config.cudaForwardCompat = false;
+
+  nixpkgs.overlays = [
+    (_: prev: {
+      onnxruntime = prev.onnxruntime.override { cudaSupport = false; };
+    })
+  ];
+
+  systemd.services.nix-daemon.serviceConfig.MemoryMax = "90%";
 
   hardware.nvidia = {
     modesetting.enable = true;
