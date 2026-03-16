@@ -12,11 +12,7 @@
       url = "path:/etc/secrets";
       flake = false;
     };
-    hyprland = {
-      url = "github:hyprwm/Hyprland/v0.53.3";
-      # does not work on unstable yet
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    hyprland.url = "github:hyprwm/Hyprland/v0.54.2";
   };
 
   nixConfig = {
