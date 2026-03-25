@@ -1,25 +1,9 @@
 {
-  lib,
   pkgs,
   inputs,
   ...
 }:
 {
-  nixpkgs.config.allowUnfreePredicate =
-    pkg:
-    (builtins.elem (lib.getName pkg) [
-      "nvidia-settings"
-      "nvidia-x11"
-      "cuda-merged"
-      "libnvjitlink"
-      "libnpp"
-      "cudnn"
-      "zerotierone"
-      "steam"
-      "steam-unwrapped"
-    ])
-    || (builtins.match "^(cuda_[a-z_]+)|(libcu[a-z]+)$" (lib.getName pkg)) != null;
-
   environment.systemPackages = with pkgs; [
     brightnessctl
     gcc
@@ -50,5 +34,7 @@
     pulsemixer
     podman-tui
     podman-compose
+    amneziawg-go
+    amneziawg-tools
   ];
 }

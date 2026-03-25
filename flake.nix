@@ -26,19 +26,19 @@
       nixosConfigurations."miementa" =
         let
           system = "x86_64-linux";
+          allowUnfreePredicate = import ./unfree.nix nixpkgs.lib;
         in
         nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = { inherit inputs; };
           modules = [
             {
+              nixpkgs.config = { inherit allowUnfreePredicate; };
               nixpkgs.overlays = [
                 (self: super: {
                   unstable = import inputs.nixpkgs-unstable {
                     inherit (self.stdenv.hostPlatform) system;
-                    config = {
-                      inherit (self.config) allowUnfreePredicate;
-                    };
+                    config = { inherit allowUnfreePredicate; };
                   };
                 })
               ];
