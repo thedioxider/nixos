@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 {
   programs = {
     command-not-found.enable = false;
@@ -26,7 +26,10 @@
       enable = true;
       binfmt = true;
     };
-    amnezia-vpn.enable = true;
+    amnezia-vpn = {
+      enable = true;
+      package = pkgs.unstable.amnezia-vpn;
+    };
     adb.enable = true;
     steam.enable = true;
   };
