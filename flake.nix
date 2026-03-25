@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-25.11";
+    nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
     nix-sweep.url = "github:jzbor/nix-sweep";
     sops-nix = {
       url = "github:Mic92/sops-nix";
@@ -22,7 +23,6 @@
   outputs =
     { self, nixpkgs, ... }@inputs:
     {
-
       nixosConfigurations."miementa" =
         let
           system = "x86_64-linux";
@@ -31,6 +31,18 @@
           inherit system;
           specialArgs = { inherit inputs; };
           modules = [
+            {
+              nixpkgs.overlays = [
+                (self: super: {
+                  unstable = import inputs.nixpkgs-unstable {
+                    inherit (self.stdenv.hostPlatform) system;
+                    config = {
+                      inherit (self.config) allowUnfreePredicate;
+                    };
+                  };
+                })
+              ];
+            }
             ### Main configurations
             ./system.nix
 
