@@ -23,6 +23,8 @@
 
   systemd.services.nix-daemon.serviceConfig.MemoryMax = "90%";
 
+  hardware.nvidia-container-toolkit.enable = true;
+
   hardware.nvidia = {
     modesetting.enable = true;
 
