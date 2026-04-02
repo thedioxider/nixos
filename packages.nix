@@ -24,7 +24,6 @@
       p7zip
       calc
       dive
-      distrobox
       exfatprogs
       xorg.xhost
       libGL
