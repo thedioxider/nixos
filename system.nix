@@ -51,6 +51,12 @@
     useXkbConfig = true;
   };
 
+  # FHS compat: some third-party scripts use #!/bin/bash
+  system.activationScripts.binbash = {
+    deps = [ "binsh" ];
+    text = "ln -sfn ${pkgs.bash}/bin/bash /bin/bash";
+  };
+
   networking.hostName = "miementa";
 
   time.timeZone = "Europe/Moscow";
@@ -190,5 +196,6 @@
   # and migrated your data accordingly.
   #
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
+
   system.stateVersion = "24.11"; # Did you read the comment?
 }
