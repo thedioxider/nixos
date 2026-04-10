@@ -4,7 +4,6 @@
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-25.11";
     nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
-    nix-sweep.url = "github:jzbor/nix-sweep";
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -84,7 +83,6 @@
 
             ### Other
             inputs.hyprland.nixosModules.default
-            inputs.nix-sweep.nixosModules.default
             inputs.sops-nix.nixosModules.sops
           ];
         };

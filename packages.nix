@@ -1,8 +1,4 @@
-{
-  pkgs,
-  inputs,
-  ...
-}:
+{ pkgs, ... }:
 {
   environment.systemPackages =
     (with pkgs; [
@@ -37,8 +33,5 @@
       helix
       amneziawg-go
       amneziawg-tools
-    ])
-    ++ [
-      inputs.nix-sweep.packages.${pkgs.stdenv.hostPlatform.system}.default
-    ];
+    ]);
 }

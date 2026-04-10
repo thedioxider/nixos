@@ -10,12 +10,14 @@
     "nix-command"
     "flakes"
   ];
-  services.nix-sweep = {
+  programs.nh = {
     enable = true;
-    interval = "weekly";
-    removeOlder = "7d";
-    keepMin = 5;
-    keepMax = 20;
+    flake = "/etc/nixos";
+    clean = {
+      enable = true;
+      dates = "weekly";
+      extraArgs = "--keep 3 --keep-since 7d";
+    };
   };
   nix.optimise = {
     automatic = true;
