@@ -25,6 +25,7 @@ in
   ];
   boot.initrd.kernelModules = [ "i915" ];
   boot.kernelModules = [ "kvm-intel" ];
+  boot.kernelParams = [ "acpi_backlight=nvidia_wmi_ec" ];
   boot.extraModulePackages = with config.boot.kernelPackages; [ ];
   # boot.kernelPatches = [{
   #   name = "asus-armoury";
@@ -95,7 +96,13 @@ in
     "i915"
   ];
 
-  hardware.bluetooth.enable = true;
+  hardware.bluetooth = {
+    enable = true;
+    settings.General = {
+      Experimental = true;
+      FastConnectable = true;
+    };
+  };
 
   services.xserver.xkb.layout = "us,ru";
 
