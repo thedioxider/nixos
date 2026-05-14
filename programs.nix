@@ -24,7 +24,7 @@
     nix-ld.enable = true;
     npm = {
       enable = true;
-      package = pkgs.unstable.nodePackages.npm;
+      package = pkgs.unstable.nodejs;
     };
     partition-manager.enable = true;
     rog-control-center.enable = true;
