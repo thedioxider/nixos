@@ -24,7 +24,6 @@
       xorg.xhost
       libGL
       glib
-      cudatoolkit
       pulsemixer
       podman-tui
       podman-compose
