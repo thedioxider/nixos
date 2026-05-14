@@ -54,7 +54,7 @@ in
   fileSystems."/dsk/win/D" = {
     device = "/dev/disk/by-uuid/A876D57A76D54A28";
     fsType = "ntfs";
-    options = [ "nofail" "exec" ];
+    options = [ "nofail" "exec" "uid=1134" "gid=100" "umask=022" ];
   };
 
   boot.loader.grub.extraEntries = ''
