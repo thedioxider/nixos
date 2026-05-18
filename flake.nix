@@ -12,7 +12,7 @@
       url = "path:/etc/secrets";
       flake = false;
     };
-    hyprland.url = "github:hyprwm/Hyprland/v0.54.2";
+    hyprland.url = "github:hyprwm/Hyprland/v0.55.2";
   };
 
   nixConfig = {
