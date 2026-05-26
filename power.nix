@@ -6,6 +6,8 @@
     powertop.enable = true;
   };
 
+  services.upower.enable = true;
+
   ### Power management utilities
   # services.thermald.enable = true;
   # services.auto-cpufreq.enable = true;
