@@ -40,7 +40,6 @@
       enable = true;
       package = pkgs.unstable.amnezia-vpn;
     };
-    adb.enable = true;
     steam = {
       enable = true;
       package = pkgs.unstable.steam;

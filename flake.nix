@@ -2,7 +2,7 @@
   description = "NixOS system built by Diomentia";
 
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-25.11";
+    nixpkgs.url = "nixpkgs/nixos-26.05";
     nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
     sops-nix = {
       url = "github:Mic92/sops-nix";

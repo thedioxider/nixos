@@ -21,7 +21,7 @@
       calc
       dive
       exfatprogs
-      xorg.xhost
+      xhost
       libGL
       glib
       pulsemixer
