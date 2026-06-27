@@ -35,7 +35,7 @@
     IdleActionSec = "5min";
     InhibitDelayMaxSec = "15s";
     SleepOperation = "suspend";
-    HandlePowerKey = "poweroff";
+    HandlePowerKey = "ignore";
     HandlePowerKeyLongPress = "hibernate";
     HandleSuspendKey = "suspend";
     HandleSuspendKeyLongPress = "reboot";
