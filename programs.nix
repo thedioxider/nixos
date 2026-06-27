@@ -9,7 +9,6 @@
         cp = "cp -i";
         mv = "mv -i";
       };
-      package = pkgs.unstable.fish;
     };
     git.enable = true;
     firefox.enable = true;
