@@ -19,8 +19,6 @@ in
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
     NIXOS_XDG_OPEN_USE_PORTAL = "1";
-    # https://wiki.hyprland.org/Configuring/Multi-GPU/
-    AQ_DRM_DEVICES = "/dev/dri/card1:/dev/dri/card0";
   };
 
   services.displayManager.sddm = {
@@ -43,5 +41,5 @@ in
     portalPackage = hyprland-pkgs.xdg-desktop-portal-hyprland;
   };
 
-  security.pam.services.hyprlock = {};
+  security.pam.services.hyprlock = { };
 }

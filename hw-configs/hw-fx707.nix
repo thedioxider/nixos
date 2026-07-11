@@ -54,7 +54,13 @@ in
   fileSystems."/dsk/win/D" = {
     device = "/dev/disk/by-uuid/A876D57A76D54A28";
     fsType = "ntfs";
-    options = [ "nofail" "exec" "uid=1134" "gid=100" "umask=022" ];
+    options = [
+      "nofail"
+      "exec"
+      "uid=1134"
+      "gid=100"
+      "umask=022"
+    ];
   };
 
   boot.loader.grub.extraEntries = ''
@@ -105,6 +111,18 @@ in
   };
 
   services.xserver.xkb.layout = "us,ru";
+
+  programs.aqGpu = {
+    enable = true;
+    aliases = {
+      igpu = "0000:00:02.0";
+      dgpu = "0000:01:00.0";
+    };
+    order = [
+      "igpu"
+      "dgpu"
+    ];
+  };
 
   # hardware.opentabletdriver = {
   #   enable = true;

@@ -81,6 +81,9 @@
             ### keyd remapping service setup
             ./keyd.nix
 
+            ### Switch primary GPU at relogin
+            ./aq-gpu.nix
+
             ### Other
             inputs.hyprland.nixosModules.default
             inputs.sops-nix.nixosModules.sops
