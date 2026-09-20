@@ -155,7 +155,6 @@ in
     };
   };
 
-  # required for DHCP to function
   networking.firewall = {
     enable = true;
     allowedUDPPorts = [
