@@ -9,5 +9,6 @@ lib: pkg:
   "zerotierone"
   "steam"
   "steam-unwrapped"
+  "happ"
 ])
 || (builtins.match "^(cuda_[a-z_]+)|(libcu[a-z]+)$" (lib.getName pkg)) != null

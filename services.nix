@@ -21,5 +21,6 @@
         ];
       };
     };
+    happ.enable = true;
   };
 }

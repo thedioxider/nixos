@@ -13,6 +13,10 @@
       flake = false;
     };
     hyprland.url = "github:hyprwm/Hyprland/v0.55.2";
+    happ = {
+      url = "github:NonExistPlayer/happ.nix";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
   };
 
   nixConfig = {
@@ -87,6 +91,7 @@
             ### Other
             inputs.hyprland.nixosModules.default
             inputs.sops-nix.nixosModules.sops
+            inputs.happ.nixosModules.default
           ];
         };
     };

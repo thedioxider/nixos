@@ -71,6 +71,26 @@
         "type": "github"
       }
     },
+    "happ": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs-unstable"
+        ]
+      },
+      "locked": {
+        "lastModified": 1785175972,
+        "narHash": "sha256-1Q0nscZpmAYcLc2haHD4F/66dr6fLYv9+qpBwzpk+Ew=",
+        "owner": "NonExistPlayer",
+        "repo": "happ.nix",
+        "rev": "fb55ac79a3eef835cf54296b70085ea75feb4da9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NonExistPlayer",
+        "repo": "happ.nix",
+        "type": "github"
+      }
+    },
     "hyprcursor": {
       "inputs": {
         "hyprlang": [
@@ -460,6 +480,7 @@
     },
     "root": {
       "inputs": {
+        "happ": "happ",
         "hyprland": "hyprland",
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-unstable": "nixpkgs-unstable",
