@@ -66,6 +66,9 @@
   services.libinput.enable = true;
   services.printing.enable = true;
 
+  # Let the active local user open USB devices directly (JTAG programmers, boards)
+  services.udev.extraRules = ''SUBSYSTEM=="usb", TAG+="uaccess"'';
+
   services.xserver.xkb.options = "grp:win_space_toggle,shift:both_shiftlock";
 
   security.lsm = lib.mkForce [ ];
