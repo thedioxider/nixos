@@ -12,15 +12,22 @@
       wireplumber.extraConfig."99-bt-suspend" = {
         "monitor.bluez.rules" = [
           {
-            matches = [{ "node.name" = "~bluez_output.*"; }];
+            matches = [ { "node.name" = "~bluez_output.*"; } ];
             actions.update-props = {
-                "session.suspend-timeout-seconds" = 1;
-                "node.pause-on-idle" = true;
-              };
+              "session.suspend-timeout-seconds" = 1;
+              "node.pause-on-idle" = true;
+            };
           }
         ];
       };
     };
     happ.enable = true;
+    zapret = {
+      enable = false;
+      params = [
+        "--dpi-desync=multidisorder"
+        "--dpi-desync-split-pos=2"
+      ];
+    };
   };
 }
